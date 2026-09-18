@@ -1,41 +1,107 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ==========================================================
+   1. VARIÁVEIS DE COR E TEMA (altere aqui as cores do site)
+   ========================================================== */
+:root{
+  --verde:#1f9d55;        /* cor principal / destaque */
+  --verde-escuro:#0d4d2b; /* títulos e footer */
+  --fundo:#f4faf6;        /* fundo geral */
+  --card:#ffffff;         /* fundo dos cartões */
+  --texto:#16302096;
+  --texto:#1b3326;        /* cor do texto */
 }
-body {
-    font-family: Arial, sans-serif;
+/* Tema escuro automático (segue o sistema do visitante) */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--fundo:#0e1a13;--card:#16271d;--texto:#e3f1e8;--verde-escuro:#7fd8a4;}
 }
-/*Cabeçario */
-header {
-    background-color:  #8E9C78;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-radius: 0px 0px 15px 15px;
-}
-#Vida { 
-    color :#434F46;
-    font-size: 24px; 
-    
-}
-#titulo-hero {
-    align-items: center;
-    padding: 200px 680px;
-    font-size: 30px;
- 
-}
+:root[data-theme="dark"]{--fundo:#0e1a13;--card:#16271d;--texto:#e3f1e8;--verde-escuro:#7fd8a4;}
 
-    
+/* ==========================================================
+   2. BASE
+   ========================================================== */
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}   /* rolagem animada ao clicar em links #ancora */
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--fundo);color:var(--texto);line-height:1.6}
+section{padding:90px 6vw;max-width:1100px;margin:auto;scroll-margin-top:70px} /* scroll-margin evita o cabeçalho cobrir o título */
+h2{font-size:2rem;color:var(--verde-escuro);margin-bottom:28px}
 
+/* ==========================================================
+   3. CABEÇALHO (fixo no topo)
+   ========================================================== */
+header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:22px;
+  padding:14px 6vw;background:rgba(10,40,25,.55);backdrop-filter:blur(10px);color:#fff}
+header .logo{font-weight:800;margin-right:auto;letter-spacing:.5px}
+header a{color:#fff;text-decoration:none;font-weight:500}
+header a:hover{color:#8ff0b5}
 
-nav {
-    display: flex;
-    gap: 35px;
-}
-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-}
+/* Botão da lupa */
+#btn-busca{background:none;border:0;color:#fff;font-size:1.3rem;cursor:pointer;transition:transform .3s}
+#btn-busca:hover{transform:scale(1.2) rotate(-10deg)}
+
+/* Painel de sugestões: começa fechado (altura 0) e "abre" animando a altura/opacidade */
+#painel-busca{position:fixed;top:56px;left:50%;transform:translateX(-50%) translateY(-10px);
+  width:min(680px,92vw);background:var(--card);border-radius:0 0 18px 18px;overflow:hidden;
+  max-height:0;opacity:0;pointer-events:none;z-index:49;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  transition:max-height .5s ease,opacity .35s ease,transform .5s ease}
+#painel-busca.aberto{max-height:520px;opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+#painel-busca input{width:100%;padding:16px 20px;border:0;border-bottom:1px solid #8883;font-size:1rem;background:transparent;color:var(--texto);outline:none}
+#painel-busca a{display:block;padding:13px 20px;color:var(--texto);text-decoration:none;font-size:.95rem;border-left:4px solid transparent;transition:.2s}
+#painel-busca a:hover{background:#1f9d5522;border-left-color:var(--verde)}
+
+/* ==========================================================
+   4. HERO (efeito de rolagem)
+   O #hero é ALTO (220vh) e o conteúdo interno fica "grudado" (sticky).
+   Enquanto o usuário rola esses 220vh, o JavaScript calcula o progresso
+   (0 a 1) e altera desfoque, brilho e opacidade.
+   ========================================================== */
+#hero{height:220vh;position:relative;max-width:none;padding:0}
+.hero-fixo{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(160deg,#e9f7ee,#cdeedb)}
+
+/* Moldura da imagem com BORDAS SUAVES: a máscara esmaece as bordas */
+.moldura{position:absolute;inset:9% 6%;border-radius:30px;overflow:hidden;
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 62%,transparent 100%);
+          mask-image:radial-gradient(ellipse at center,#000 62%,transparent 100%);
+  opacity:0;filter:blur(14px);transition:filter .15s linear}  /* opacity e blur são controlados pelo JS */
+
+/* Carrossel: slides empilhados; só o .ativo aparece */
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s;display:grid;place-items:end start;padding:40px 60px;color:#fff;font-size:1.2rem;font-weight:600;text-shadow:0 2px 8px #0008}
+.slide.ativo{opacity:1}
+/* >>> TROQUE OS GRADIENTES POR FOTOS: background:url('minha-foto.jpg') center/cover; <<< */
+.s1{background:linear-gradient(135deg,#1f9d55,#0b5a3a 60%,#063a29)}
+.s2{background:linear-gradient(135deg,#2a9df4,#1b6fa8 60%,#0d3f66)}
+.s3{background:linear-gradient(135deg,#f2b632,#d27b1c 60%,#8a4a0f)}
+
+/* Título central */
+.titulo{position:relative;z-index:2;text-align:center;padding:0 5vw;
+  font-size:clamp(2.2rem,7.5vw,5.8rem);font-weight:900;line-height:1.05;color:var(--verde-escuro);
+  transition:opacity .1s linear}  /* opacity controlada pelo JS */
+.titulo em{font-style:normal;color:var(--verde);font-size:1.35em;display:block;letter-spacing:4px;
+  text-shadow:0 0 30px #1f9d5566}   /* "LIMPO" maior, colorido e com brilho */
+
+/* Setas do carrossel */
+.seta{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;
+  border:0;background:#ffffffcc;color:#0d4d2b;font-size:1.6rem;cursor:pointer;transition:.25s;opacity:0}
+.seta.visivel{opacity:1}
+.seta:hover{transform:translateY(-50%) scale(1.12);background:#fff}
+#prox{right:3vw}#ant{left:3vw}
+
+/* ==========================================================
+   5. NOTÍCIAS E COMO AJUDAR (cartões)
+   ========================================================== */
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.card{background:var(--card);padding:24px;border-radius:18px;box-shadow:0 6px 20px #0001;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px)}
+.card h3{color:var(--verde-escuro);margin:8px 0 6px;font-size:1.1rem}
+.tag{font-size:.75rem;background:#1f9d5528;color:var(--verde);padding:3px 10px;border-radius:99px;font-weight:700}
+.passo{font-size:2rem}
+/* Destaque temporário quando uma sugestão da busca leva até o cartão */
+.destaque{animation:pulsa 1.6s ease}
+@keyframes pulsa{0%,100%{box-shadow:0 6px 20px #0001}30%{box-shadow:0 0 0 6px var(--verde)}}
+
+/* ==========================================================
+   6. FOOTER / SOBRE NÓS
+   ========================================================== */
+footer{background:#0d4d2b;color:#e6f7ec;padding:70px 6vw;text-align:center}
+footer h2{color:#8ff0b5}
+footer p{max-width:640px;margin:0 auto 10px}

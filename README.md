@@ -54,5 +54,3 @@ Além disso, o mesmo elemento deve ter um comportamento de scroll animado para f
 O site deve ser visualmente impactante, moderno e educativo, com uma estética limpa, inspirada em sustentabilidade, responsabilidade ambiental e ação coletiva.
 
 Quero que o código fique bem organizado e comentado para facilitar futuras alterações.
-
-aaa

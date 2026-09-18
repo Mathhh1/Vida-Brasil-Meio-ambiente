@@ -1,47 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link  rel="stylesheet" href="styles.css">
-    <link rel="icon" href="imagens/favicon_io-MUDA/favicon-32x32.png" type="image/x-icon">
-    <title>NOME NÃO DEFINDO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juntos por um planeta mais LIMPO</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header> 
-    <!--Cabeçario da página. (Ref : greenpeace. https://www.greenpeace.org/brasil/)-->
-    <h1 id="Vida">Vida Brasil</h1>
-    <div id="Nav1">
-    <nav>
-            <a href="#notícias">notícias</a>
-            <a href="#como ajudar">como ajudar</a>
-            <a href="#sobre nós">sobre nós</a>
-    </nav>
-    </div>
-</header>
-<main>
-    <!--A página continura a baixo em diante.-->
-    <!--A ideia inicial é que todas as notícias sejam fictícias-->
-<h1 id="titulo-hero">Juntos por um planeta mais <b>limpo</b> </h1>
-<p>teste</p>
 
-<section id="notícias">
-    <h2>Notícias</h2>
-    <div class="noticia">
-        <h3>Notícia 1</h3>
-        <p>Descrição da notícia 1.</p>
+<!-- ============ CABEÇALHO ============ -->
+<header>
+  <span class="logo">🌱 Planeta LIMPO</span>
+  <a href="#noticias">Notícias</a>
+  <a href="#ajudar">Como ajudar</a>
+  <a href="#sobre">Sobre nós</a>   <!-- #sobre = id do footer -->
+  <button id="btn-busca" aria-label="Pesquisar">🔍</button>
+</header>
+
+<!-- Painel de busca: os <a> são criados pelo JavaScript (veja SUGESTOES) -->
+<div id="painel-busca">
+  <input id="campo" placeholder="Pesquisar notícias e ações..." autocomplete="off">
+  <div id="lista"></div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="hero-fixo">
+    <div class="moldura" id="moldura">
+      <div class="slide s1 ativo">Florestas que renascem</div>
+      <div class="slide s2">Oceanos e rios limpos</div>
+      <div class="slide s3">Comunidades em ação</div>
     </div>
-    <div class="noticia">
-        <h3>Notícia 2</h3>
-        <p>Descrição da notícia 2.</p>
-    </div>
-    <div class="noticia">
-        <h3>Notícia 3</h3>
-        <p>Descrição da notícia 3.</p>
-    </div>
-</main>
-<footer>
+    <h1 class="titulo" id="titulo">Juntos por um planeta mais <em>LIMPO</em></h1>
+    <button class="seta" id="ant" aria-label="Anterior">‹</button>
+    <button class="seta" id="prox" aria-label="Próxima">›</button>
+  </div>
+</section>
+
+<!-- ============ NOTÍCIAS ============ -->
+<section id="noticias">
+  <h2>Notícias</h2>
+  <div class="grade">
+    <!-- Para adicionar outra notícia: copie um <article> e mude o id -->
+    <article class="card" id="drones"><span class="tag">Tecnologia verde</span><h3>Drones plantam 10 mil árvores por dia</h3><p>Nova tecnologia recupera áreas desmatadas com muito mais rapidez.</p></article>
+    <article class="card" id="enzima"><span class="tag">Ciência</span><h3>Enzima decompõe garrafas PET em horas</h3><p>Pesquisadores abrem caminho para uma reciclagem realmente eficiente.</p></article>
+    <article class="card" id="filtro"><span class="tag">Universidade</span><h3>Filtro de baixo custo limpa rios poluídos</h3><p>Estudantes criam solução acessível para tratar a água.</p></article>
+    <article class="card" id="energia"><span class="tag">Dicas</span><h3>Do lixo orgânico à energia limpa</h3><p>Aprenda a transformar os resíduos da sua casa em biogás.</p></article>
+  </div>
+</section>
+
+<!-- ============ COMO AJUDAR ============ -->
+<section id="ajudar">
+  <h2>Como ajudar</h2>
+  <div class="grade">
+    <div class="card"><div class="passo">1️⃣</div><h3>Separe seu lixo</h3><p>Recicláveis, orgânicos e rejeitos em recipientes diferentes.</p></div>
+    <div class="card" id="mutirao"><div class="passo">2️⃣</div><h3>Participe de mutirões</h3><p>Junte amigos e limpe praias, rios e praças da sua cidade.</p></div>
+    <div class="card"><div class="passo">3️⃣</div><h3>Reduza o plástico</h3><p>Leve sua sacola e garrafa reutilizáveis.</p></div>
+    <div class="card"><div class="passo">4️⃣</div><h3>Divulgue</h3><p>Compartilhe este projeto e inspire mais pessoas.</p></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER (Sobre nós) ============ -->
+<footer id="sobre">
+  <h2>Sobre nós</h2>
+  <p>Somos uma iniciativa coletiva que reúne estudantes, pesquisadores e voluntários para mostrar que pequenas ações, somadas, limpam o planeta.</p>
+  <p>© 2026 Juntos por um planeta mais LIMPO</p>
 </footer>
-<script rel="script" src="script.js"></script>
+
+<script src="script.js"></script>
 </body>
 </html>
